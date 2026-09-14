@@ -11,9 +11,9 @@ This repo rebuilds Skipton's public **Help and Support** page (structure and cop
 
 ## What's live right now
 
-- Repo: `https://github.com/gauravkumar_adobe/skipton-eds-demo` (private)
+- Repo: `https://github.com/gaurravv/skipton-eds-demo` (private)
 - Local preview: `npm install && npx -y @adobe/aem-cli up --html-folder drafts --html-mount / --no-open`, then open `http://localhost:3000/help-and-support`
-- Once code is synced (see "Remaining setup" below): `https://main--skipton-eds-demo--gauravkumar_adobe.aem.page/help-and-support`
+- Once code is synced (see "Remaining setup" below): `https://main--skipton-eds-demo--gaurravv.aem.page/help-and-support`
 
 Pages:
 - `/help-and-support` — the rebuilt page: hero, "What do you need help with?" cards, "Other ways we can help" (image cards), "Get in touch", "Help for conveyancers" — same structure/copy as the live Skipton page.
@@ -39,13 +39,13 @@ The two are wired together at the CDN/routing layer, not in code — this matche
 2. `curl http://localhost:3000/help-and-support` vs `curl http://localhost:3000/help-and-support.plain.html` — show the raw block markup a developer works against.
 3. Open [blocks/cards/cards.js](blocks/cards/cards.js) and [blocks/cards/cards.css](blocks/cards/cards.css) — walk through the block contract: a block is just a `decorate(block)` function plus scoped CSS, no build step, no bundler. This is the direct equivalent of a Core Component, but plain JS/CSS.
 4. Show the "promo" variant (`class="cards promo"`) in the same block file — this is how a developer adds a second look for authors to choose from without writing a new block.
-5. Push to a branch → AEM Code Sync auto-syncs → preview at `https://<branch>--skipton-eds-demo--gauravkumar_adobe.aem.page/` → PageSpeed Insights check (target: 100) → PR → merge → live. (Exact flow in [AGENTS.md](AGENTS.md#publishing-process).)
+5. Push to a branch → AEM Code Sync auto-syncs → preview at `https://<branch>--skipton-eds-demo--gaurravv.aem.page/` → PageSpeed Insights check (target: 100) → PR → merge → live. (Exact flow in [AGENTS.md](AGENTS.md#publishing-process).)
 
 ## 3. Author flow (script for the call)
 
 Document Authoring (da.live) is the content source (see `fstab.yaml`). Authors never touch GitHub or code.
 
-1. Open `https://da.live/#/gauravkumar_adobe/skipton-eds-demo` (requires AEM Code Sync installed first — see below).
+1. Open `https://da.live/#/gaurravv/skipton-eds-demo` (requires AEM Code Sync installed first — see below).
 2. Open `help-and-support` — content is a normal rich-text document. Blocks are tables: the first cell of the first row is the block name (e.g. `Cards`, or `Cards (promo)` for the variant), each following row is one card.
 3. Edit a card's text live, or add a new row to the `Cards` table for a new help topic — no dev involved.
 4. Use the Sidekick (browser extension) **Preview** then **Publish** — show the change go live in seconds.
@@ -60,6 +60,6 @@ Structure and copy are taken from the public `skipton.co.uk/help-and-support` pa
 ## Remaining setup (needs your action, not mine)
 
 1. **Install AEM Code Sync** on this repo — I can't do this via API, it needs your GitHub click-through:
-   `https://github.com/apps/aem-code-sync/installations/new` → select `gauravkumar_adobe` → **Only select repositories** → `skipton-eds-demo` → Save.
+   `https://github.com/apps/aem-code-sync/installations/new` → select `gaurravv` → **Only select repositories** → `skipton-eds-demo` → Save.
 2. **Populate DA** with the nav/footer/help-and-support content (step 1-2 under "Author flow" above) — needs your Adobe IMS login, I can't do this for you.
 3. **Send me your AEMaaCS sandbox host** (author + publish) if you want the literal coexistence routing config drafted rather than just described.
