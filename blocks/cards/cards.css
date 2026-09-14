@@ -1,0 +1,70 @@
+.cards > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
+  gap: 24px;
+}
+
+.cards > ul > li {
+  border: 1px solid #dadada;
+  background-color: var(--background-color);
+}
+
+.cards .cards-card-body {
+  margin: 16px;
+}
+
+.cards .cards-card-image {
+  line-height: 0;
+}
+
+.cards > ul > li img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.cards > ul > li h3 {
+  margin-top: 0;
+  font-size: var(--heading-font-size-s);
+}
+
+.cards > ul > li h3 a {
+  color: inherit;
+}
+
+.cards > ul > li h3 a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.cards > ul > li {
+  position: relative;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.cards > ul > li:has(h3 a):hover {
+  box-shadow: 0 8px 20px rgb(0 0 0 / 10%);
+  transform: translateY(-2px);
+}
+
+/* promo variant: larger, image-forward tiles used for secondary/marketing callouts */
+.cards.promo > ul {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+}
+
+.cards.promo > ul > li {
+  border: none;
+}
+
+.cards.promo .cards-card-image img {
+  aspect-ratio: 16 / 9;
+}
+
+.cards.promo .cards-card-body {
+  margin: 20px 0 0;
+}
