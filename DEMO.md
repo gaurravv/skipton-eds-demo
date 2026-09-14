@@ -31,7 +31,39 @@ The two are wired together at the CDN/routing layer, not in code — this matche
 - Every other path keeps routing to your AEM Publish tier as it does today
 - Shared header/footer (already built here from the same nav structure as skipton.co.uk) keep the transition invisible to a visitor
 
-**What I need from you to wire this for real:** your sandbox's author/publish host names, so I can draft the literal CDN/reverse-proxy rule (Fastly/Akamai/CloudFront, whichever you use) for `/help-and-support` → EDS, everything else → AEM. Until then, the two sides can be demoed side by side (two browser tabs) rather than one seamless domain.
+### Your sandbox
+
+- Author: `https://author-p133255-e1921317.adobeaemcloud.com/`
+- Publish (inferred from the standard AEMaaCS naming convention — confirm with your infra team): `https://publish-p133255-e1921317.adobeaemcloud.com/`
+
+Both hosts responded when checked (author: 401, needs auth as expected; publish: 301) — this is a live environment, not a placeholder.
+
+### Option A — native AEM path (recommended, no custom CDN rule needed)
+
+Since this is AEM as a Cloud Service, Adobe's own Managed CDN already fronts your Publish tier, and AEM has a built-in Edge Delivery Services Configuration for exactly this coexistence pattern:
+
+1. Sign in to the author instance above → **Tools → Cloud Services → Edge Delivery Services Configuration**.
+2. Create/select the configuration for this project, set:
+   - GitHub organization: `gaurravv`
+   - Site name: `skipton-eds-demo`
+3. This tells Adobe's Managed CDN to route matching paths to the EDS site instead of AEM Publish — no separate reverse-proxy rule to write or maintain.
+4. Scope it to `/help-and-support` (or whichever paths you want to hand to EDS) per AEM's path-mapping settings for that configuration.
+
+### Option B — manual CDN rule (if you're fronting AEM with your own Fastly/Akamai/CloudFront instead of Adobe's Managed CDN)
+
+Path-based routing, evaluated before your default AEM origin rule:
+
+```
+if (req.url.path matches "^/help-and-support(/.*)?$") {
+  set req.backend = eds_backend;  // main--skipton-eds-demo--gaurravv.aem.live
+} else {
+  set req.backend = aem_publish_backend;  // publish-p133255-e1921317.adobeaemcloud.com
+}
+```
+
+The exact syntax depends on which CDN sits in front of your publish tier (VCL for Fastly, an Edge Function for Akamai, a Lambda@Edge/CloudFront Function for CloudFront) — tell me which one and I'll write the real config, not pseudocode.
+
+Until either option is wired up, demo the two sides side by side (two browser tabs: your AEM author/preview vs. the EDS live URL) rather than one seamless domain.
 
 ## 2. Developer flow (script for the call)
 
@@ -57,9 +89,9 @@ The exact tables to (re)create in DA for each page mirror the block markup alrea
 
 Structure and copy are taken from the public `skipton.co.uk/help-and-support` page to make the demo recognizable. Photography is replaced with neutral placeholder graphics (no Skipton stock photos or logo assets are included), and the footer carries an explicit "demo, not affiliated with Skipton" disclaimer. This repo is private.
 
-## Remaining setup (needs your action, not mine)
+## Status
 
-1. **Install AEM Code Sync** on this repo — I can't do this via API, it needs your GitHub click-through:
-   `https://github.com/apps/aem-code-sync/installations/new` → select `gaurravv` → **Only select repositories** → `skipton-eds-demo` → Save.
-2. **Populate DA** with the nav/footer/help-and-support content (step 1-2 under "Author flow" above) — needs your Adobe IMS login, I can't do this for you.
-3. **Send me your AEMaaCS sandbox host** (author + publish) if you want the literal coexistence routing config drafted rather than just described.
+- ✅ AEM Code Sync installed
+- ✅ `nav`, `footer`, `help-and-support` authored in DA, previewed, and published — live at `https://main--skipton-eds-demo--gaurravv.aem.live/help-and-support`
+- ✅ Sandbox host captured — see "Your sandbox" above
+- ⬜ Wire up Option A (native AEM Edge Delivery Services Configuration) or Option B (manual CDN rule) above, whichever matches how your Publish tier is fronted — tell me which and I'll help drive it or write the exact config.
