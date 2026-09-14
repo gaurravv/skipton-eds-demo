@@ -38,20 +38,43 @@ The two are wired together at the CDN/routing layer, not in code — this matche
 
 Both hosts responded when checked (author: 401, needs auth as expected; publish: 301) — this is a live environment, not a placeholder.
 
-### Option A — native AEM path (recommended, no custom CDN rule needed)
+### Option A — Adobe Managed CDN + Config Pipeline (recommended, this is the documented Adobe path for exactly this scenario)
 
-Since this is AEM as a Cloud Service, Adobe's own Managed CDN already fronts your Publish tier, and AEM has a built-in Edge Delivery Services Configuration for exactly this coexistence pattern:
+Source: [Adobe Managed CDN](https://www.aem.live/docs/byo-cdn-adobe-managed) → "(Option 1) Setup a proxy from an existing environment", and [Introduction to Edge Delivery Services in Cloud Manager](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/edge-delivery-sites/introduction-to-edge-delivery-services). This is Adobe's documented path for "I already have an AEMaaCS environment and want to migrate part of a site to EDS" — exactly this situation.
 
-1. Sign in to the author instance above → **Tools → Cloud Services → Edge Delivery Services Configuration**.
-2. Create/select the configuration for this project, set:
-   - GitHub organization: `gaurravv`
-   - Site name: `skipton-eds-demo`
-3. This tells Adobe's Managed CDN to route matching paths to the EDS site instead of AEM Publish — no separate reverse-proxy rule to write or maintain.
-4. Scope it to `/help-and-support` (or whichever paths you want to hand to EDS) per AEM's path-mapping settings for that configuration.
+**Step 1 — Register this EDS site in Cloud Manager** ([Add an Edge Delivery site](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/edge-delivery-sites/add-edge-delivery-site)):
+1. Confirm the program (for `author-p133255-e1921317`) has an Edge Delivery Services license.
+2. Sign in to Cloud Manager at [experience.adobe.com](https://experience.adobe.com/) → **Cloud Manager** → select your org → open the program for this sandbox.
+3. Program Overview → **Edge Delivery** tab → **Add Edge Delivery site** (or via the left menu: **Services → Edge Delivery Sites → Add Edge Delivery site**).
+4. Fill in:
+   - **Site Name**: `skipton-eds-demo`
+   - **Edge Delivery origin**: `https://main--skipton-eds-demo--gaurravv.aem.live`
+   - Description (optional)
+5. Click **Add**. Cloud Manager will show a **Verify repository ownership** step: add a file at `.well-known/adobe/cloudmanager-challenge.txt` in the `main` branch containing the code it gives you, PR + merge it, then click **Verify**. (I can add this file and open the PR the moment you have the challenge code — just paste it here.)
 
-### Option B — manual CDN rule (if you're fronting AEM with your own Fastly/Akamai/CloudFront instead of Adobe's Managed CDN)
+**Step 2 — Route `/help-and-support` to the EDS site via CDN Config Pipeline**:
+1. Create a `cdn.yaml` under a `config/` (or `config-prod/`) folder in your AEM source repo (not this one — your AEMaaCS Java/dispatcher repo), using an `originSelectors` rule scoped to the path, e.g. conceptually:
+   ```yaml
+   kind: "CDN"
+   version: "1"
+   data:
+     originSelectors:
+       rules:
+         - name: route-help-and-support-to-eds
+           when:
+             reqProperty: path
+             like: "/help-and-support*"
+           action:
+             type: <select-origin-action>   # see note below
+             # target: main--skipton-eds-demo--gaurravv.aem.live
+   ```
+2. Deploy it via a Cloud Manager [Config Pipeline](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/operations/config-pipeline).
 
-Path-based routing, evaluated before your default AEM origin rule:
+**One thing I couldn't verify from official docs**: the exact `action.type` value and target-origin field for pointing an origin selector *at an EDS/aem.live backend* specifically (Adobe's docs confirm `originSelectors` is the right mechanism and confirm `type: selectAemOrigin` for proxying to another *AEM* origin, but I couldn't find the literal published example for the EDS-origin case in the time available). Before deploying, either open an Adobe support ticket referencing "Edge Delivery Services" + this program, or ask in Adobe's Edge Delivery Services product collaboration channel (join via the Cloud Manager Edge Delivery to-do list) to get the exact field name — I don't want to hand you an unverified config for something that touches your CDN.
+
+### Option B — manual CDN rule (only if you front Publish with your own Fastly/Akamai/CloudFront instead of Adobe Managed CDN)
+
+Same path-based idea, different mechanism — tell me which CDN vendor and I'll write the real rule:
 
 ```
 if (req.url.path matches "^/help-and-support(/.*)?$") {
@@ -60,8 +83,6 @@ if (req.url.path matches "^/help-and-support(/.*)?$") {
   set req.backend = aem_publish_backend;  // publish-p133255-e1921317.adobeaemcloud.com
 }
 ```
-
-The exact syntax depends on which CDN sits in front of your publish tier (VCL for Fastly, an Edge Function for Akamai, a Lambda@Edge/CloudFront Function for CloudFront) — tell me which one and I'll write the real config, not pseudocode.
 
 Until either option is wired up, demo the two sides side by side (two browser tabs: your AEM author/preview vs. the EDS live URL) rather than one seamless domain.
 
