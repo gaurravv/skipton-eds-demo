@@ -8,8 +8,10 @@
 }
 
 .cards > ul > li {
+  position: relative;
   border: 1px solid #dadada;
   background-color: var(--background-color);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .cards .cards-card-body {
@@ -41,16 +43,6 @@
   inset: 0;
 }
 
-.cards > ul > li {
-  position: relative;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
-}
-
-.cards > ul > li:has(h3 a):hover {
-  box-shadow: 0 8px 20px rgb(0 0 0 / 10%);
-  transform: translateY(-2px);
-}
-
 /* promo variant: larger, image-forward tiles used for secondary/marketing callouts */
 .cards.promo > ul {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -67,4 +59,9 @@
 
 .cards.promo .cards-card-body {
   margin: 20px 0 0;
+}
+
+.cards > ul > li:has(h3 a):hover {
+  box-shadow: 0 8px 20px rgb(0 0 0 / 10%);
+  transform: translateY(-2px);
 }

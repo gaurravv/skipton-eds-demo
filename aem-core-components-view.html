@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Help and support — AEM Core Components reference | Skipton EDS Demo</title>
+<style>
+  :root {
+    --brand-color: #008060;
+    --brand-color-dark: #00594b;
+    --light-color: #f4f7f6;
+    --text-color: #131313;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: var(--text-color); }
+  .demo-banner { background: #4b2e00; color: white; text-align: center; padding: 8px 16px; font-size: 13px; }
+  .demo-banner a { color: white; }
+  .aem-toolbar { background: #1473e6; color: white; font-size: 12px; padding: 6px 16px; display: flex; gap: 16px; }
+  header.site-header { border-bottom: 3px solid var(--brand-color); padding: 16px 32px; display: flex; justify-content: space-between; align-items: center; }
+  header.site-header .brand { font-weight: 700; color: var(--brand-color-dark); font-size: 20px; }
+  header.site-header nav a { margin-left: 20px; color: var(--text-color); text-decoration: none; font-size: 14px; }
+  .cmp-hero { position: relative; min-height: 340px; display: flex; align-items: center; padding: 48px 32px; background: var(--brand-color-dark); color: white; overflow: hidden; }
+  .cmp-hero svg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.5; z-index: 0; }
+  .cmp-hero .cmp-title { position: relative; z-index: 1; max-width: 640px; }
+  .cmp-hero h1 { margin: 0 0 12px; font-size: 40px; }
+  main { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+  section { margin: 40px 0; }
+  h2 { font-size: 28px; }
+  .cmp-container.cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(257px, 1fr)); gap: 24px; }
+  .cmp-teaser { border: 1px solid #dadada; padding: 16px; position: relative; }
+  .cmp-teaser h3 { margin-top: 0; font-size: 18px; }
+  .cmp-teaser h3 a { color: inherit; text-decoration: none; }
+  .cmp-teaser h3 a::after { content: ''; position: absolute; inset: 0; }
+  .cmp-container.promo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
+  .cmp-teaser.promo svg { width: 100%; aspect-ratio: 16/9; display: block; }
+  .highlight-bg { background: var(--light-color); padding: 40px 0; margin: 0; }
+  .highlight-bg > main { padding-top: 0; padding-bottom: 0; }
+  footer.site-footer { border-top: 3px solid var(--brand-color); background: var(--light-color); padding: 40px 32px 24px; font-size: 13px; }
+  footer.site-footer .cmp-container.footer-cols { max-width: 1200px; margin: 0 auto; display: flex; gap: 32px; flex-wrap: wrap; }
+  footer.site-footer .cmp-container.footer-cols > div { flex: 1; min-width: 160px; }
+  footer.site-footer h4 { color: var(--brand-color-dark); margin-top: 0; }
+  footer.site-footer ul { list-style: none; padding: 0; margin: 0; }
+  footer.site-footer li { margin-bottom: 8px; }
+  .arch-note { max-width: 1200px; margin: 24px auto; padding: 0 32px 24px; font-size: 12px; color: #555; }
+</style>
+</head>
+<body>
+  <p class="demo-banner">This page: illustrative reference only — represents today's <strong>AEM Sites, Core Components (headful)</strong> rendering. Not a live AEM instance, not affiliated with or published by Skipton Building Society. Compare with the <a href="/help-and-support">EDS Blocks + DA version</a>.</p>
+  <div class="aem-toolbar">AEM Author &middot; Page Editor &middot; Core Components 2.x &middot; Publish tier: Dispatcher + App Server</div>
+
+  <header class="site-header">
+    <div class="brand">Skipton EDS Demo</div>
+    <nav>
+      <a href="#">Savings</a>
+      <a href="#">Mortgages</a>
+      <a href="#">Financial Advice</a>
+      <a href="#">Insurance</a>
+      <a href="#">Membership</a>
+      <a href="#">Life and Money</a>
+      <a href="#">Help and Support</a>
+    </nav>
+  </header>
+
+  <div class="cmp-hero">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Placeholder photo">
+      <rect width="1200" height="675" fill="#00594b"/>
+      <rect width="1200" height="675" fill="#008060" opacity="0.35"/>
+    </svg>
+    <div class="cmp-title">
+      <h1>Help and support</h1>
+      <p>Want some information quickly? Let's get the answers you need to help you manage your savings, mortgages, and more.</p>
+    </div>
+  </div>
+
+  <main>
+    <section>
+      <h2>What do you need help with?</h2>
+      <div class="cmp-container cards-grid">
+        <div class="cmp-teaser"><h3><a href="#">Help with my savings</a></h3><p>From how to pay in, withdraw, and transfer your money to what you should do if you can't find your documents.</p></div>
+        <div class="cmp-teaser"><h3><a href="#">Help with my mortgage</a></h3><p>We want to make understanding mortgages easier. Head to our mortgage help and support pages.</p></div>
+        <div class="cmp-teaser"><h3><a href="#">Help with my insurance</a></h3><p>View your policy documents, learn how to make a claim, discover ways to change your existing policy, and more.</p></div>
+        <div class="cmp-teaser"><h3><a href="#">Support with Bereavement and Legacy</a></h3><p>Straightforward guidance to support you at this difficult time, including how to register as a Power of Attorney.</p></div>
+        <div class="cmp-teaser"><h3><a href="#">Help with Fraud and Security</a></h3><p>Tips to stay safe from scammers, including how to protect yourself, and what to look out for.</p></div>
+        <div class="cmp-teaser"><h3><a href="#">App and Online support</a></h3><p>Manage your savings and mortgage anytime, with our simple step-by-step guides.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="highlight-bg">
+    <main>
+      <section style="margin: 0;">
+        <h2>Other ways we can help</h2>
+        <div class="cmp-container promo-grid">
+          <div class="cmp-teaser promo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Placeholder photo"><rect width="1200" height="675" fill="#00594b"/><rect width="1200" height="675" fill="#008060" opacity="0.35"/></svg>
+            <h3>Extra support</h3>
+            <p>Need further help? Here's how you can get in touch with us, and ways we can better support you with any accessibility needs.</p>
+            <p><a href="#">Extra Support</a></p>
+          </div>
+          <div class="cmp-teaser promo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Placeholder photo"><rect width="1200" height="675" fill="#00594b"/><rect width="1200" height="675" fill="#008060" opacity="0.35"/></svg>
+            <h3>Base Rate change</h3>
+            <p>Find out how your mortgage or savings account may be affected by the change in the Bank of England Base Rate.</p>
+            <p><a href="#">Base Rate change</a></p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <main>
+    <section>
+      <h2>Get in touch</h2>
+      <div class="cmp-container promo-grid">
+        <div class="cmp-teaser"><h3>Contact us</h3><p>For further support, one of our friendly members of staff would be more than happy to assist you.</p><p><a href="#">Contact us</a></p></div>
+        <div class="cmp-teaser"><h3>Branch finder</h3><p>Find your closest branch, along with the opening times, contact information and accessibility information.</p><p><a href="#">Branch finder</a></p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Help for conveyancers</h2>
+      <h3>Information for conveyancers</h3>
+      <p>Documents and information for licensed conveyancers who have a client with, or applying for, a mortgage.</p>
+      <p><a href="#">Information for conveyancers</a></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="cmp-container footer-cols">
+      <div><h4>Our Products</h4><ul><li>Savings</li><li>Mortgages</li><li>Financial Advice</li><li>Insurance</li></ul></div>
+      <div><h4>Our Society</h4><ul><li>Membership</li><li>About us</li><li>Sustainability</li><li>Careers</li></ul></div>
+      <div><h4>Help &amp; Support</h4><ul><li>Help and Support</li><li>Contact us</li><li>Branch finder</li><li>Fraud and Security</li></ul></div>
+      <div><h4>Legal</h4><ul><li>Legal notice</li><li>Data privacy notice</li><li>Cookies</li></ul></div>
+    </div>
+  </footer>
+
+  <div class="arch-note">
+    <strong>Behind this page (illustrative):</strong> AEM Author (JCR) &rarr; Publish tier + Dispatcher &rarr; app-server-rendered HTML.
+    Content authored via the AEM Page Editor with Core Components; same visual design tokens and nav/footer content as the EDS version for a like-for-like comparison. This mock uses placeholder graphics — no Skipton assets or branding are used.
+  </div>
+</body>
+</html>

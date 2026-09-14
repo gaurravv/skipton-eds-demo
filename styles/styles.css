@@ -326,15 +326,43 @@ main .section.highlight {
   padding: 40px 0;
 }
 
-.demo-banner {
+main .demo-banner-container {
+  margin: 0;
   background: var(--brand-color-dark);
+}
+
+main .demo-banner-container > div {
+  max-width: unset;
+  padding: 0;
+}
+
+.demo-banner {
   color: white;
   text-align: center;
   padding: 8px 16px;
+  margin: 0;
   font-size: var(--body-font-size-xs);
 }
 
 .demo-banner a {
   color: white;
   text-decoration: underline;
+}
+
+main table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 640px;
+  margin: 16px 0;
+}
+
+main table td {
+  border: 1px solid #ccc;
+  padding: 10px 14px;
+  vertical-align: top;
+}
+
+main table tr:first-child td {
+  background-color: var(--light-color);
+  font-weight: 700;
 }
