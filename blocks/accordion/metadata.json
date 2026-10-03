@@ -1,0 +1,23 @@
+{
+  "variantName": "accordion",
+  "baseBlock": "accordion",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "faq",
+    "imagePattern": "noimg",
+    "structure": "question + answer rows",
+    "notes": "Full main-column width, thin light-grey row dividers, uppercase bold question labels, '+' icon right-aligned, ~48px row height"
+  },
+  "contentPattern": "rows of question (cell 1) + rich-text answer (cell 2)",
+  "usage": {
+    "pagesUsing": [
+      "https://publish-p133255-e1921317.adobeaemcloud.com/content/wknd/us/en/faqs.html"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-03"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

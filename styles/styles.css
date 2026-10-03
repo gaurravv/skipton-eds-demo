@@ -38,8 +38,14 @@
   --heading-font-size-s: 24px;
   --heading-font-size-xs: 22px;
 
-  /* nav height */
-  --nav-height: 64px;
+  /* nav height (utility bar + main header row) */
+  --nav-height: 117px;
+}
+
+@media (width >= 1200px) {
+  :root {
+    --nav-height: 194px;
+  }
 }
 
 /* fallback fonts */
@@ -365,4 +371,136 @@ main table td {
 main table tr:first-child td {
   background-color: var(--light-color);
   font-weight: 700;
+}
+
+/* WKND theme (pages with metadata Theme: wknd) */
+body.wknd {
+  --wknd-red: #f00;
+  --wknd-yellow: #ffea00;
+  --wknd-blue: #0045ff;
+  --wknd-light: #ebebeb;
+  --wknd-font: "Source Sans Pro", "Helvetica Neue", helvetica, arial, sans-serif;
+  --wknd-heading-font: asar, georgia, "Times New Roman", serif;
+}
+
+.wknd main {
+  padding-top: 6px;
+  color: var(--wknd-red);
+  font-family: var(--wknd-font);
+  font-size: 18px;
+  line-height: 27px;
+}
+
+.wknd main > .section {
+  margin: 0;
+}
+
+.wknd main > .section > div {
+  max-width: 1136px;
+  padding: 0 28px;
+}
+
+/* top spacing as padding: spacing adds up between stacked titles, like the source */
+.wknd main h1,
+.wknd main h2,
+.wknd main h3 {
+  margin: 0 0 13.5px;
+  padding-top: 27px;
+  color: var(--wknd-red);
+  font-family: var(--wknd-heading-font);
+  font-weight: 400;
+}
+
+.wknd main h1 {
+  font-size: 40px;
+  line-height: 60px;
+}
+
+.wknd main h2 {
+  font-size: 36px;
+  line-height: 54px;
+}
+
+.wknd main h3 {
+  font-size: 24px;
+  line-height: 36px;
+}
+
+/* yellow underline below page and section titles */
+.wknd main .default-content-wrapper > h1::after,
+.wknd main .default-content-wrapper > h2::after {
+  content: '';
+  display: block;
+  width: 84px;
+  margin-top: 8px;
+  border-bottom: 2px solid var(--wknd-yellow);
+}
+
+.wknd main .default-content-wrapper > h1:has(+ h2)::after {
+  content: none;
+}
+
+.wknd main p {
+  margin: 0 0 13.5px;
+}
+
+.wknd main .default-content-wrapper > p {
+  line-height: 45px;
+  text-align: justify;
+}
+
+.wknd main .default-content-wrapper > p:has(> picture) {
+  margin-bottom: 7px;
+  line-height: 0;
+}
+
+.wknd main .default-content-wrapper > p > picture img {
+  margin: 7px 0;
+}
+
+/* short intro lines (italic) */
+.wknd main .default-content-wrapper > p:has(> em:only-child) {
+  font-size: 14px;
+  line-height: 35px;
+}
+
+.wknd main a:any-link {
+  color: var(--wknd-blue);
+}
+
+/* aside: narrow side column with small text */
+.wknd main .section.aside {
+  padding-top: 18px;
+}
+
+.wknd main .section.aside .default-content-wrapper > p {
+  font-size: 14px;
+  line-height: 35px;
+  text-align: start;
+}
+
+@media (width >= 1200px) {
+  /* main column + aside side by side */
+  .wknd main:has(> .section.aside) {
+    display: grid;
+    grid-template-columns: 1fr minmax(0, 776px) 97px minmax(0, 291px) 1fr;
+    align-items: start;
+  }
+
+  .wknd main:has(> .section.aside) > .section {
+    grid-column: 2;
+  }
+
+  .wknd main:has(> .section.aside) > .section > div {
+    padding: 0 14px;
+  }
+
+  .wknd main:has(> .section.aside) > .section.aside {
+    grid-row: 1 / span 10;
+    grid-column: 4;
+  }
+
+  .wknd main:has(> .section.aside) > .section.aside > div {
+    padding: 0;
+  }
 }

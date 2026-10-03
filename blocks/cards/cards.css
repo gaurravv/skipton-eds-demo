@@ -65,3 +65,123 @@
   box-shadow: 0 8px 20px rgb(0 0 0 / 10%);
   transform: translateY(-2px);
 }
+
+/* profile variant: centered person cards (circular portrait, name, role, social icons) */
+.cards.profile > ul {
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin: 0 -14px;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.cards.profile > ul > li {
+  padding: 9px 14px 18px;
+  border: none;
+  background-color: transparent;
+  text-align: center;
+  transition: none;
+}
+
+.cards.profile > ul > li:hover {
+  box-shadow: none;
+  transform: none;
+}
+
+.cards.profile .cards-card-image {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 7px;
+}
+
+.cards.profile > ul > li .cards-card-image img {
+  width: 164px;
+  height: 164px;
+  margin: 7px 0;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.cards.profile .cards-card-body {
+  margin: 0;
+}
+
+.cards.profile > ul > li h3 {
+  margin: 0 0 6px;
+  padding: 0;
+  font-size: 24px;
+  line-height: 36px;
+}
+
+/* keep social links clickable: no full-card link overlay in profile cards */
+.cards.profile > ul > li h3 a::after {
+  content: none;
+}
+
+/* role line */
+.cards.profile .cards-card-body > p {
+  margin: 0 0 3.5px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  text-transform: uppercase;
+}
+
+/* social links: icon tiles, label kept for screen readers */
+.cards.profile .cards-card-body ul {
+  display: flex;
+  justify-content: center;
+  margin: 21px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards.profile .cards-card-body ul li {
+  margin: 0;
+}
+
+.cards.profile .cards-card-body ul a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+  background-color: #f00;
+  color: transparent;
+  font-size: 0;
+}
+
+.cards.profile .cards-card-body ul a .icon {
+  width: 18px;
+  height: 18px;
+}
+
+.cards.profile .cards-card-body ul a .icon img {
+  object-fit: contain;
+  filter: brightness(0) invert(92%);
+}
+
+.cards.profile .cards-card-body ul a:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+@media (width >= 600px) {
+  .cards.profile > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 900px) {
+  .cards.profile > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (width >= 1200px) {
+  .cards.profile > ul {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

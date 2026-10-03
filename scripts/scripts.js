@@ -10,6 +10,9 @@ import {
   loadSections,
   loadCSS,
   buildBlock,
+  readBlockConfig,
+  toCamelCase,
+  toClassName,
 } from './aem.js';
 
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
@@ -143,14 +146,62 @@ function decorateButtons(main) {
 }
 
 /**
+ * Turns icon notation inside links (e.g. ":facebook: Facebook") into EDS icon spans,
+ * as the delivery pipeline does for authored documents.
+ * @param {Element} main The container element
+ */
+function decorateIconTokens(main) {
+  const token = /:([a-z][a-z0-9-]*):/g;
+  main.querySelectorAll('a').forEach((a) => {
+    [...a.childNodes].forEach((node) => {
+      if (node.nodeType !== Node.TEXT_NODE || !token.test(node.textContent)) return;
+      token.lastIndex = 0;
+      const parts = node.textContent.split(token);
+      const nodes = parts.map((part, i) => {
+        if (i % 2 === 0) return document.createTextNode(part);
+        const span = document.createElement('span');
+        span.className = `icon icon-${part}`;
+        return span;
+      });
+      node.replaceWith(...nodes);
+    });
+  });
+}
+
+/**
+ * Applies section metadata blocks to their sections: `style` values become
+ * section classes, other keys become data attributes. The metadata block is removed.
+ * @param {Element} main The container element
+ */
+function decorateSectionMetadata(main) {
+  main.querySelectorAll(':scope > .section div.section-metadata').forEach((sectionMeta) => {
+    const section = sectionMeta.closest('.section');
+    const meta = readBlockConfig(sectionMeta);
+    Object.entries(meta).forEach(([key, value]) => {
+      if (key === 'style') {
+        `${value}`.split(',').map((style) => toClassName(style.trim())).filter(Boolean)
+          .forEach((style) => section.classList.add(style));
+      } else {
+        section.dataset[toCamelCase(key)] = value;
+      }
+    });
+    const wrapper = sectionMeta.parentElement;
+    if (wrapper && wrapper !== section && wrapper.children.length === 1) wrapper.remove();
+    else sectionMeta.remove();
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
 // eslint-disable-next-line import/prefer-default-export
 export function decorateMain(main) {
+  decorateIconTokens(main);
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
+  decorateSectionMetadata(main);
   decorateBlocks(main);
   decorateButtons(main);
 }
