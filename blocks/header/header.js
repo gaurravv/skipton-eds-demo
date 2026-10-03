@@ -19,6 +19,9 @@ async function fetchNav() {
   container.querySelectorAll('img[src]').forEach((img) => {
     img.src = new URL(img.getAttribute('src'), resp.url).href;
   });
+  container.querySelectorAll('source[srcset]').forEach((source) => {
+    source.srcset = new URL(source.getAttribute('srcset'), resp.url).href;
+  });
   return container;
 }
 
@@ -94,7 +97,8 @@ function buildUtility(section) {
   const bar = el('div', { class: 'nav-utility-inner' });
   const label = [...section.querySelectorAll(':scope > p')].find((p) => !p.querySelector('a'));
   const countries = section.querySelector(':scope > ul');
-  const signInLink = section.querySelector(':scope > p > a[href^="#"]');
+  // the first linked paragraph is the sign-in trigger (its href may be rewritten on upload)
+  const signInLink = section.querySelector(':scope > p > a');
   if (signInLink) {
     signInLink.className = 'nav-sign-in';
     signInLink.setAttribute('role', 'button');

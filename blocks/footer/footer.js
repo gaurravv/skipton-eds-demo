@@ -12,8 +12,12 @@ async function fetchFooter() {
   if (!resp.ok) return null;
   const container = document.createElement('div');
   container.innerHTML = await resp.text();
+  // image paths in the footer document are relative to the document, not the current page
   container.querySelectorAll('img[src]').forEach((img) => {
     img.src = new URL(img.getAttribute('src'), resp.url).href;
+  });
+  container.querySelectorAll('source[srcset]').forEach((source) => {
+    source.srcset = new URL(source.getAttribute('srcset'), resp.url).href;
   });
   return container;
 }
