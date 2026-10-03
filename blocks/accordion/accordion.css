@@ -1,0 +1,99 @@
+.accordion .accordion-item {
+  border-bottom: 2px solid #ebebeb;
+}
+
+.accordion .accordion-item-heading {
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+.accordion .accordion-item-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  margin: 0;
+  padding: 13.333px 13.333px 13.333px 21.333px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: #000;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  text-align: start;
+  text-transform: uppercase;
+  white-space: normal;
+  cursor: pointer;
+}
+
+.accordion .accordion-item-button:focus-visible {
+  outline: 2px solid currentcolor;
+  outline-offset: -2px;
+}
+
+.accordion .accordion-item-label {
+  flex: 1 1 auto;
+}
+
+/* '+' indicator; vertical bar collapses to form '-' when expanded */
+.accordion .accordion-item-icon {
+  position: relative;
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+}
+
+.accordion .accordion-item-icon::before,
+.accordion .accordion-item-icon::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 1.5px;
+  background-color: currentcolor;
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s ease;
+}
+
+.accordion .accordion-item-icon::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.accordion .accordion-item-button[aria-expanded='true'] .accordion-item-icon::after {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.accordion .accordion-item-panel[hidden] {
+  display: none;
+}
+
+.accordion .accordion-item-body {
+  padding: 7px 0 13.5px 7px;
+  font-size: 14px;
+  line-height: 24.5px;
+  text-align: justify;
+}
+
+.accordion .accordion-item-body > :first-child {
+  margin-top: 0;
+}
+
+.accordion .accordion-item-body > :last-child {
+  margin-bottom: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accordion .accordion-item-icon::before,
+  .accordion .accordion-item-icon::after {
+    transition: none;
+  }
+}

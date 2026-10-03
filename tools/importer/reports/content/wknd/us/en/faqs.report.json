@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://publish-p133255-e1921317.adobeaemcloud.com/content/wknd/us/en/faqs.html",
+  "path": "content/wknd/us/en/faqs",
+  "timestamp": "2026-10-03T20:39:15.108Z",
+  "title": "FAQs",
+  "template": "faqs",
+  "blocks": [
+    "accordion"
+  ],
+  "images": "{\"https://publish-p133255-e1921317.adobeaemcloud.com/us/en/faqs/_jcr_content/root/container/container/image.coreimg.jpeg/1660323785307/adobestock-277768563.jpeg\":\"/images/adobestock-277768563.jpeg\"}"
+}

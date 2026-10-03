@@ -1,0 +1,107 @@
+{
+  "templates": [
+    {
+      "name": "about-us",
+      "urls": [
+        "https://publish-p133255-e1921317.adobeaemcloud.com/content/wknd/us/en/about-us.html"
+      ],
+      "representativeUrl": "https://publish-p133255-e1921317.adobeaemcloud.com/content/wknd/us/en/about-us.html",
+      "description": "WKND About Us page: page title, contributor and guide profile grids",
+      "blocks": [
+        {
+          "name": "cards-profile",
+          "instances": [
+            "main.cmp-layout-container--fixed > .cmp-container > .aem-Grid > .experiencefragment.cmp-experience-fragment--contributor",
+            ".cmp-experience-fragment--contributor"
+          ]
+        }
+      ],
+      "urlPattern": "/content/wknd/us/en/*",
+      "sections": [
+        {
+          "id": "1",
+          "name": "Page title and Our Contributors",
+          "selector": [
+            "main.cmp-layout-container--fixed > .cmp-container > .aem-Grid > .title:first-child"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-profile"
+          ],
+          "defaultContent": [
+            "main.cmp-layout-container--fixed > .cmp-container > .aem-Grid > .title:first-child",
+            "main.cmp-layout-container--fixed > .cmp-container > .aem-Grid > .title.cmp-title--underline:nth-child(2)",
+            "main.cmp-layout-container--fixed > .cmp-container > .aem-Grid > .text:nth-child(3)"
+          ]
+        },
+        {
+          "id": "2",
+          "name": "WKND Guides",
+          "selector": [
+            "main.cmp-layout-container--fixed > .cmp-container > .aem-Grid > .title.cmp-title--underline ~ .title.cmp-title--underline"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-profile"
+          ],
+          "defaultContent": [
+            "main.cmp-layout-container--fixed > .cmp-container > .aem-Grid > .title.cmp-title--underline ~ .title.cmp-title--underline",
+            "main.cmp-layout-container--fixed > .cmp-container > .aem-Grid > .title.cmp-title--underline ~ .title.cmp-title--underline + .text"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "faqs",
+      "urls": [
+        "https://publish-p133255-e1921317.adobeaemcloud.com/content/wknd/us/en/faqs.html"
+      ],
+      "representativeUrl": "https://publish-p133255-e1921317.adobeaemcloud.com/content/wknd/us/en/faqs.html",
+      "description": "WKND FAQs page: title, hero image, intro text, FAQ accordion, contact sidebar",
+      "blocks": [
+        {
+          "name": "accordion",
+          "instances": [
+            "div.accordion.panelcontainer .cmp-accordion",
+            ".cmp-accordion"
+          ]
+        }
+      ],
+      "urlPattern": "/content/wknd/us/en/*",
+      "sections": [
+        {
+          "id": "1",
+          "name": "FAQ main content",
+          "selector": [
+            "main .container.responsivegrid.aem-GridColumn--default--8"
+          ],
+          "style": null,
+          "blocks": [
+            "accordion"
+          ],
+          "defaultContent": [
+            "main .container.responsivegrid.aem-GridColumn--default--8 .title",
+            "main .container.responsivegrid.aem-GridColumn--default--8 .image",
+            "main .container.responsivegrid.aem-GridColumn--default--8 > .cmp-container > .aem-Grid > .text"
+          ]
+        },
+        {
+          "id": "2",
+          "name": "Need more help aside",
+          "selector": [
+            "main .container.responsivegrid.aem-GridColumn--default--3"
+          ],
+          "style": "aside",
+          "blocks": [],
+          "defaultContent": [
+            "main .container.responsivegrid.aem-GridColumn--default--3 .title",
+            "main .container.responsivegrid.aem-GridColumn--default--3 .text"
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "projectType": "da"
+  }
+}

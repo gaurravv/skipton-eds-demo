@@ -1,0 +1,11 @@
+{
+  "type": "da",
+  "sites": {
+    "skipton-eds-demo": {
+      "previewOrg": "gaurravv",
+      "previewSite": "skipton-eds-demo",
+      "contentHostUrl": "https://content.da.live/gaurravv/skipton-eds-demo/",
+      "libraryUrl": "https://main--sta-boilerplate--aemdemos.aem.page/tools/sidekick/library.json"
+    }
+  }
+}

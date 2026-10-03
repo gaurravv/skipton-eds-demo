@@ -1,0 +1,25 @@
+{
+  "variantName": "cards",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "airy",
+    "purpose": "content grid; promo callouts; team/profile",
+    "imagePattern": "image-top (default 4:3, promo 16:9, profile circular 1:1 portrait)",
+    "structure": "responsive grid of cards, one card per authored row; default bordered tiles with hover lift on linked cards; promo borderless image-forward tiles; profile centered person cards with circular portrait, name, italic role line and inline social links (1 col mobile, 2 at 600px, 3 at 900px, 4 at 1200px)"
+  },
+  "contentPattern": "rows of image cell + body cell; profile body = h3 name + role paragraph + list of social links",
+  "usage": {
+    "pagesUsing": [
+      "https://publish-p133255-e1921317.adobeaemcloud.com/content/wknd/us/en/about-us.html"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-03"
+  },
+  "options": [
+    { "class": "promo", "label": "Promo" },
+    { "class": "profile", "label": "Profile" }
+  ],
+  "memberVariantIds": []
+}
