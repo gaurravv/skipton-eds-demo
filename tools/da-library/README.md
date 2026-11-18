@@ -1,7 +1,13 @@
 # DA block library
 
-Example documents that power **Library → Blocks** in da.live, built from this repo's blocks
-(Hero, Cards, Cards (promo), Columns, Fragment, Section Metadata, Metadata).
+Example documents that power **Library → Blocks** in da.live:
+
+- Custom blocks: Hero, Cards (+ promo), Columns, Accordion, Fragment, Section Metadata, Metadata.
+- Adobe OOTB blocks (code copied from `adobe/aem-block-collection`, examples from
+  `aemsites/da-block-collection`): Carousel, Embed, Search, Table, Tabs, Video.
+
+Not included: Quote (removed on purpose), Form (needs a submission backend),
+Modal (link-driven, not an insertable block).
 
 ## Why not point at Adobe's `da-block-collection`?
 DA rewrites every library URL (including `*.aem.page`) to `admin.da.live/source/<org>/<site>/...`
