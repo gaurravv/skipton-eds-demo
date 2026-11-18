@@ -22,7 +22,7 @@ Structure and copy are taken from the public `skipton.co.uk/help-and-support` pa
 
 ## Repo layout
 
-- `blocks/` — EDS blocks (`hero`, `cards` incl. the `promo` image variant, `accordion`, `quote`, `widget`, `header`, `footer`, `columns`, `fragment`)
+- `blocks/` — EDS blocks (`hero`, `cards` incl. the `promo` image variant, `accordion`, `widget`, `header`, `footer`, `columns`, `fragment`)
 - `scripts/` — `aem.js` (EDS library), `scripts.js` (page decoration and loading), `delayed.js` (third-party code)
 - `styles/` — global styles for default content, sections and buttons
 - `drafts/` — local-dev content matching the real published pages (used with `--html-folder drafts`); also the reference structure for what's authored in DA
@@ -38,8 +38,9 @@ Structure and copy are taken from the public `skipton.co.uk/help-and-support` pa
    fetch the document and convert it to semantic HTML on `.aem.page` / `.aem.live`.
 2. **Page structure:** `---` separates sections, and ordinary text, headings and
    images are default content. A table whose first row is a name (for example
-   `Quote`) becomes a block: `<div class="quote">`. There are no component JSON
-   files; the table header is the block name.
+   `Accordion`) becomes a block: `<div class="accordion">`. There are no component JSON
+   files; the table header is the block name. `npm run build:json` exists only for
+   parity with the UE repo and has nothing to build here.
 3. **Browser:** `head.html` loads `scripts/aem.js`, `scripts/scripts.js` and
    `styles/styles.css`. `loadPage()` in `scripts.js` runs three phases:
    - **`loadEager`:** runs `decorateMain`, which turns icon tokens and icons into
